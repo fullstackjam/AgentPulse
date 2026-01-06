@@ -1,6 +1,7 @@
 name = "agentpulse"
 main = "src/index.ts"
 compatibility_date = "2024-12-01"
+assets = { directory = "./web/dist" }
 
 routes = [
   { pattern = "agentpulse.fullstackjam.com", custom_domain = true }

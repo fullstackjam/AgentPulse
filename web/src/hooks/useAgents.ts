@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Snapshot } from "../types";
 
-const API_URL = import.meta.env.PROD
-  ? "https://agentpulse.fullstackjam.com/api/agents"
-  : "/api/agents";
+const API_URL = "/api/agents";
 
 export function useAgents() {
   const [data, setData] = useState<Snapshot | null>(null);
