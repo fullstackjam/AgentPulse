@@ -7,6 +7,7 @@ export const AGENTS: AgentConfig[] = [
     repo: "getcursor/cursor",
     category: "IDE",
     website: "https://cursor.com",
+    hnKeyword: "cursor ai editor",
   },
   {
     id: "cline",
@@ -14,6 +15,8 @@ export const AGENTS: AgentConfig[] = [
     repo: "cline/cline",
     category: "VSCode Extension",
     website: "https://cline.bot",
+    openVsxId: "saoudrizwan/claude-dev",
+    hnKeyword: "cline ai",
   },
   {
     id: "aider",
@@ -21,6 +24,8 @@ export const AGENTS: AgentConfig[] = [
     repo: "Aider-AI/aider",
     category: "CLI",
     website: "https://aider.chat",
+    pypiPackage: "aider-chat",
+    hnKeyword: "aider ai",
   },
   {
     id: "openhands",
@@ -28,6 +33,8 @@ export const AGENTS: AgentConfig[] = [
     repo: "All-Hands-AI/OpenHands",
     category: "Platform",
     website: "https://all-hands.dev",
+    pypiPackage: "openhands-ai",
+    hnKeyword: "openhands",
   },
   {
     id: "continue",
@@ -35,6 +42,8 @@ export const AGENTS: AgentConfig[] = [
     repo: "continuedev/continue",
     category: "IDE Extension",
     website: "https://continue.dev",
+    openVsxId: "Continue/continue",
+    hnKeyword: "continue dev ai",
   },
   {
     id: "plandex",
@@ -42,6 +51,7 @@ export const AGENTS: AgentConfig[] = [
     repo: "plandex-ai/plandex",
     category: "CLI",
     website: "https://plandex.ai",
+    hnKeyword: "plandex",
   },
   {
     id: "gpt-pilot",
@@ -49,6 +59,8 @@ export const AGENTS: AgentConfig[] = [
     repo: "Pythagora-io/gpt-pilot",
     category: "CLI",
     website: "https://github.com/Pythagora-io/gpt-pilot",
+    pypiPackage: "gpt-pilot",
+    hnKeyword: "gpt-pilot",
   },
   {
     id: "sweep",
@@ -56,6 +68,7 @@ export const AGENTS: AgentConfig[] = [
     repo: "sweepai/sweep",
     category: "GitHub Bot",
     website: "https://sweep.dev",
+    hnKeyword: "sweep ai github",
   },
   {
     id: "pr-agent",
@@ -63,6 +76,8 @@ export const AGENTS: AgentConfig[] = [
     repo: "qodo-ai/pr-agent",
     category: "PR Review",
     website: "https://www.qodo.ai",
+    pypiPackage: "pr-agent",
+    hnKeyword: "pr-agent",
   },
   {
     id: "swe-agent",
@@ -70,6 +85,8 @@ export const AGENTS: AgentConfig[] = [
     repo: "princeton-nlp/SWE-agent",
     category: "Research",
     website: "https://swe-agent.com",
+    pypiPackage: "sweagent",
+    hnKeyword: "swe-agent",
   },
   {
     id: "mentat",
@@ -77,6 +94,8 @@ export const AGENTS: AgentConfig[] = [
     repo: "AbanteAI/mentat",
     category: "CLI",
     website: "https://mentat.ai",
+    pypiPackage: "mentat",
+    hnKeyword: "mentat ai coding",
   },
   {
     id: "tabby",
@@ -84,6 +103,7 @@ export const AGENTS: AgentConfig[] = [
     repo: "TabbyML/tabby",
     category: "Self-hosted Copilot",
     website: "https://tabby.tabbyml.com",
+    hnKeyword: "tabby ml",
   },
   {
     id: "devon",
@@ -91,5 +111,6 @@ export const AGENTS: AgentConfig[] = [
     repo: "entropy-research/Devon",
     category: "CLI",
     website: "https://github.com/entropy-research/Devon",
+    hnKeyword: "devon ai coding",
   },
 ];
