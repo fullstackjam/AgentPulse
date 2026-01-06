@@ -1,0 +1,11 @@
+name = "agentpulse"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+routes = [
+  { pattern = "agentpulse.fullstackjam.com", custom_domain = true }
+]
+
+[[kv_namespaces]]
+binding = "KV"
+id = "3c6ce601efdb40c4a72e301b3932ece1"
