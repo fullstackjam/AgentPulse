@@ -3,6 +3,56 @@ import { VelocityBar } from "./VelocityBar";
 import { DeltaBadge } from "./DeltaBadge";
 import { CategoryBadge } from "./CategoryBadge";
 
+function formatDownloads(num: number): string {
+  if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1)}M`;
+  if (num >= 1_000) return `${(num / 1_000).toFixed(1)}K`;
+  return num.toString();
+}
+
+function DownloadsCell({ agent }: { agent: AgentStats }) {
+  const pypi = agent.pypiDownloads;
+  const npm = agent.npmDownloads;
+  const vscode = agent.vsCodeDownloads;
+  const total = (pypi ?? 0) + (npm ?? 0) + (vscode ?? 0);
+
+  if (total === 0) {
+    return <span className="text-gray-600">-</span>;
+  }
+
+  const parts: string[] = [];
+  if (pypi) parts.push(`PyPI: ${formatDownloads(pypi)}`);
+  if (npm) parts.push(`npm: ${formatDownloads(npm)}`);
+  if (vscode) parts.push(`VSCode: ${formatDownloads(vscode)}`);
+
+  return (
+    <div className="flex flex-col items-end gap-0.5">
+      <span className="font-mono text-gray-200">{formatDownloads(total)}</span>
+      <span className="text-xs text-gray-500">{parts.join(" · ")}</span>
+    </div>
+  );
+}
+
+function HNBuzzCell({
+  mentions,
+  points,
+}: {
+  mentions?: number;
+  points?: number;
+}) {
+  if (!mentions && !points) {
+    return <span className="text-gray-600">-</span>;
+  }
+
+  return (
+    <div className="flex flex-col items-end gap-0.5">
+      <span className="font-mono text-orange-400">{points ?? 0}</span>
+      <span className="text-xs text-gray-500">
+        {mentions ?? 0} {mentions === 1 ? "post" : "posts"}
+      </span>
+    </div>
+  );
+}
+
 interface AgentRowProps {
   agent: AgentStats;
   rank: number;
@@ -72,6 +122,14 @@ export function AgentRow({ agent, rank, maxVelocity }: AgentRowProps) {
 
       <td className="px-4 py-4 text-right font-mono text-gray-400">
         {agent.commits30d}
+      </td>
+
+      <td className="px-4 py-4 text-right">
+        <DownloadsCell agent={agent} />
+      </td>
+
+      <td className="px-4 py-4 text-right">
+        <HNBuzzCell mentions={agent.hnMentions} points={agent.hnPoints} />
       </td>
 
       <td className="px-4 py-4 w-40">

@@ -10,6 +10,11 @@ export interface AgentStats {
   starDelta7d: number;
   forkDelta30d: number;
   velocityScore: number;
+  pypiDownloads?: number;
+  npmDownloads?: number;
+  vsCodeDownloads?: number;
+  hnMentions?: number;
+  hnPoints?: number;
 }
 
 export interface Snapshot {
@@ -23,5 +28,7 @@ export type SortField =
   | "stars"
   | "starDelta7d"
   | "forks"
-  | "commits30d";
+  | "commits30d"
+  | "downloads"
+  | "hnPoints";
 export type SortDirection = "asc" | "desc";

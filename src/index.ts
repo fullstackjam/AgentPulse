@@ -9,6 +9,9 @@ import {
   computeDeltas,
   rankAgentsByVelocity,
 } from "./services/velocity.js";
+import { fetchPyPIDownloads } from "./services/pypi.js";
+import { fetchOpenVSXDownloads } from "./services/openvsx.js";
+import { fetchHNStats } from "./services/hackernews.js";
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -57,10 +60,18 @@ app.post("/cron", async (c) => {
 
   for (const agent of AGENTS) {
     try {
-      const [repoStats, commits30d] = await Promise.all([
-        fetchRepoStats(agent.repo),
-        fetchCommitCount30d(agent.repo),
-      ]);
+      const [repoStats, commits30d, pypiDownloads, vsCodeDownloads, hnStats] =
+        await Promise.all([
+          fetchRepoStats(agent.repo),
+          fetchCommitCount30d(agent.repo),
+          agent.pypiPackage
+            ? fetchPyPIDownloads(agent.pypiPackage)
+            : Promise.resolve(null),
+          agent.openVsxId
+            ? fetchOpenVSXDownloads(agent.openVsxId)
+            : Promise.resolve(null),
+          agent.hnKeyword ? fetchHNStats(agent.hnKeyword) : Promise.resolve(null),
+        ]);
 
       const { starDelta7d, forkDelta30d } = computeDeltas(
         { stars: repoStats.stars, forks: repoStats.forks },
@@ -87,6 +98,10 @@ app.post("/cron", async (c) => {
         starDelta7d,
         forkDelta30d,
         velocityScore,
+        pypiDownloads: pypiDownloads ?? undefined,
+        vsCodeDownloads: vsCodeDownloads ?? undefined,
+        hnMentions: hnStats?.mentions ?? undefined,
+        hnPoints: hnStats?.totalPoints ?? undefined,
       });
     } catch (error) {
       console.error(`Failed to fetch stats for ${agent.repo}:`, error);

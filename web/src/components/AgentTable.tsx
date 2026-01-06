@@ -20,10 +20,27 @@ export function AgentTable({ agents }: AgentTableProps) {
     }
   };
 
+  const getDownloads = (agent: AgentStats) =>
+    (agent.pypiDownloads ?? 0) +
+    (agent.npmDownloads ?? 0) +
+    (agent.vsCodeDownloads ?? 0);
+
   const sortedAgents = useMemo(() => {
     return [...agents].sort((a, b) => {
-      const aVal = a[sortField];
-      const bVal = b[sortField];
+      let aVal: number;
+      let bVal: number;
+
+      if (sortField === "downloads") {
+        aVal = getDownloads(a);
+        bVal = getDownloads(b);
+      } else if (sortField === "hnPoints") {
+        aVal = a.hnPoints ?? 0;
+        bVal = b.hnPoints ?? 0;
+      } else {
+        aVal = a[sortField];
+        bVal = b[sortField];
+      }
+
       const modifier = sortDirection === "desc" ? -1 : 1;
       return (aVal - bVal) * modifier;
     });
@@ -72,6 +89,24 @@ export function AgentTable({ agents }: AgentTableProps) {
                 align="right"
               >
                 Commits
+              </SortHeader>
+              <SortHeader
+                field="downloads"
+                currentField={sortField}
+                direction={sortDirection}
+                onSort={handleSort}
+                align="right"
+              >
+                Downloads
+              </SortHeader>
+              <SortHeader
+                field="hnPoints"
+                currentField={sortField}
+                direction={sortDirection}
+                onSort={handleSort}
+                align="right"
+              >
+                HN Buzz
               </SortHeader>
               <SortHeader
                 field="velocityScore"
